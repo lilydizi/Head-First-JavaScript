@@ -1,0 +1,58 @@
+<<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Duncan's Just-In-Time Donuts</title>
+    <link rel="stylesheet" href="donuts.css">
+    <script>
+      function updateOrder() {
+        const TAXRATE = 0.0925;
+        const DONUTPRICE = 0.50;
+        var numCakeDonuts =
+        parseDonuts(document.getElementById("cakedonuts").value);
+        var numGlazedDonuts =
+        parseDonuts(document.getElementById("glazeddonuts").value);
+        if (isNaN(numCakeDonuts))
+          numCakeDonuts = 0;
+        if (isNaN(numGlazedDonuts))
+          numGlazedDonuts = 0;
+        var subTotal = (numCakeDonuts + numGlazedDonuts) * DONUTPRICE;
+        var tax = subTotal * TAXRATE;
+        var total = subTotal + tax;
+        document.getElementById("subtotal").value = "$" + subTotal.toFixed(2);
+        document.getElementById("tax").value = "$" + tax.toFixed(2);
+        document.getElementById("total").value = "$" + total.toFixed(2);
+      }
+
+      function parseDonuts(donutString) {
+        numDonuts = parseInt(donutString);
+        if (donutString.indexOf("dozen") != -1)
+          numDonuts *= 12;
+        return numDonuts;
+      }
+      function placeOrder(){
+        if (document.getElementById("name").value) == "")
+          alert("I'm sorry but you must provide your name before submitting an order.");
+        else if (document.getElementById("pickupminutes").value) =="" ||
+        isNaN(document.getElementById("pickupminutes").value)
+          alert("I'm sorry but you must provide the number of minutes until pick-up" + "before submitting an order.");
+        else {
+          //서버로 주문을 전송
+          form.submit();
+        }
+    </script>
+  </head>
+  <body>
+    <div id="frame">
+      <h1>Duncan's Just-In-Time Donuts</h1>
+      <p><l>All dunts 50 cents each, cake or glazed!</l></p>
+      <div class="field">
+        # of cake donuts: <input type="text" id="cakedonuts" name="cakedonuts" value="" onchange="updateOrder();">
+      </div>
+      <div class="field">
+        # of glazed donuts: <input type="text" id="glazeddonuts" name="glazeddonuts" value="" onchange="updateOrder();">
+      </div>
+      <input type="number" name="" value="">
+    </div>
+  </body>
+</html>
