@@ -31,18 +31,20 @@
           numDonuts *= 12;
         return numDonuts;
       }
+
       function placeOrder(form){
         if (document.getElementById("name").value) == "")
           alert("I'm sorry but you must provide your name before submitting an order.");
-        else if (document.getElementById("pickupminutes").value) =="" ||
-          isNaN(document.getElementById("pickupminutes").value)
+        else if (document.getElementById("pickupminutes").value =="" ||
+          isNaN(document.getElementById("pickupminutes").value))
           alert("I'm sorry but you must provide the number of minutes until pick-up" + "before submitting an order.");
-        else {
+        else
           //서버로 주문을 전송
           form.submit();
-        }
+      }
     </script>
   </head>
+
   <body>
     <div id="frame">
       <div class="heading">Duncan's Just-In-Time Donuts</div>
@@ -55,7 +57,7 @@
         Name : <input type="text" id="name" name="name" value="">
         </div>
         <div class="field">
-          # of cake donuts: <input type="text" id="cakedonuts" name="cakedonuts" value="" onchange="updateOrder();">
+        # of cake donuts: <input type="text" id="cakedonuts" name="cakedonuts" value="" onchange="updateOrder();">
         </div>
         <div class="field">
         # of glazed donuts: <input type="text" id="glazeddonuts" name="glazeddonuts" value=""
