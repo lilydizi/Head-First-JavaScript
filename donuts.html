@@ -1,48 +1,47 @@
-<!DOCTYPE html>
 <html>
   <head>
-  <meta charset="utf-8">
-  <title>Duncan's Just-In-Time Donuts</title>
-  <link rel="stylesheet" href="donuts.css">
-  <script>
-    function updateOrder() {
+    <title>Duncan's Just-In-Time Donuts</title>
+
+    <link rel="stylesheet" href="donuts.css">
+    <script>
+      function updateOrder() {
       // Using var instead of const for TAXRATE and DONUTPRICE to satisfy Internet Explorer
-      const TAXRATE = 0.0925;
-      const DONUTPRICE = 0.50;
-      var numCakeDonuts =
-      parseDonuts(document.getElementById("cakedonuts").value);
-      var numGlazedDonuts =
-      parseDonuts(document.getElementById("glazeddonuts").value);
-      if (isNaN(numCakeDonuts))
-        numCakeDonuts = 0;
-      if (isNaN(numGlazedDonuts))
-        numGlazedDonuts = 0;
-      var subTotal = (numCakeDonuts + numGlazedDonuts) * DONUTPRICE;
-      var tax = subTotal * TAXRATE;
-      var total = subTotal + tax;
-      document.getElementById("subtotal").value = "$" + subTotal.toFixed(2);
-      document.getElementById("tax").value = "$" + tax.toFixed(2);
-      document.getElementById("total").value = "$" + total.toFixed(2);
-    }
+        const TAXRATE = 0.0925;
+        const DONUTPRICE = 0.50;
+        var numCakeDonuts =
+        parseDonuts(document.getElementById("cakedonuts").value);
+        var numGlazedDonuts =
+        parseDonuts(document.getElementById("glazeddonuts").value);
+        if (isNaN(numCakeDonuts))
+          numCakeDonuts = 0;
+        if (isNaN(numGlazedDonuts))
+          numGlazedDonuts = 0;
+        var subTotal = (numCakeDonuts + numGlazedDonuts) * DONUTPRICE;
+        var tax = subTotal * TAXRATE;
+        var total = subTotal + tax;
+        document.getElementById("subtotal").value = "$" + subTotal.toFixed(2);
+        document.getElementById("tax").value = "$" + tax.toFixed(2);
+        document.getElementById("total").value = "$" + total.toFixed(2);
+      }
 
-    function parseDonuts(donutString) {
-      numDonuts = parseInt(donutString);
-      if (donutString.indexOf("dozen") != -1)
-        numDonuts *= 12;
-      return numDonuts;
-    }
+      function parseDonuts(donutString) {
+        numDonuts = parseInt(donutString);
+        if (donutString.indexOf("dozen") != -1)
+          numDonuts *= 12;
+        return numDonuts;
+      }
 
-    function placeOrder(form){
-      if (document.getElementById("name").value) == "")
+      function placeOrder(form){
+        if (document.getElementById("name").value == "")
         alert("I'm sorry but you must provide your name before submitting an order.");
-      else if (document.getElementById("pickupminutes").value =="" ||
-        isNaN(document.getElementById("pickupminutes").value))
-        alert("I'm sorry but you must provide the number of minutes until pick-up" + "before submitting an order.");
-      else
+        else if (document.getElementById("pickupminutes").value == "" ||
+          isNaN(document.getElementById("pickupminutes").value))
+          alert("I'm sorry but you must provide the number of minutes until pick-up before submitting an order.");
+        else
         //서버로 주문을 전송
-        form.submit();
-    }
-  </script>
+          form.submit();
+      }
+    </script>
   </head>
 
   <body>
