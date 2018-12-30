@@ -5,6 +5,9 @@
 
       var userName;
       var timerID = setInterval("alert('Wake Up!');", 10*60*1000); // 타이머정지 clearInterval(timerID);
+      function resizeRock(){
+        document.getElementById("rockImg").style.height = (document.body.clientHeight-100)*0.9;
+      }
       function greetUser(){
         alert('Hello, I am your pet rock.');
       }
@@ -20,10 +23,11 @@
       document.getElementById("rockImg").src = "rock_happy.png";
       setTimeout("document.getElementById('rockImg').src='rock.png';", 5*60*1000);
       }
+
     </script>
   </head>
 
-  <body onload="greetUser();">
+  <body onload="resizeRock();greetUser();">
     <div style="margin-top:100px; text-align:center">
       <img id="rockImg" src="rock.png" alt="iRock" style="cursor:pointer" onclick="touchRock();">
     </div>
