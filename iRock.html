@@ -19,19 +19,19 @@
         alert('Hello, I am your pet rock.');
       }
       function touchRock(){
-      if (userName){
-        alert("I like the attention," + userName + ". Thank you.");
-      }
-      else {
-        userName = prompt("What is your name?", "Enter your name here.");
-        if (userName)
-          alert("It is good to meet you," + userName + ".");
-          if(navigator.cookieEnabled)
-          writeCookie("irock_username", userName, 5 * 365);
-          else
-          alert("Sorry. Cookies aren't supported in  your browser. I won't remember you later.");
+        if (userName){
+          alert("I like the attention," + userName + ". Thank you.");
         }
-      }
+        else {
+          userName = prompt("What is your name?", "Enter your name here.");
+          if (userName)
+            alert("It is good to meet you," + userName + ".");
+            if(navigator.cookieEnabled)
+            writeCookie("irock_username", userName, 5 * 365);
+            else
+            alert("Sorry. Cookies aren't supported in  your browser. I won't remember you later.");
+        }
+      
       document.getElementById("rockImg").src = "rock_happy.png";
       setTimeout("document.getElementById('rockImg').src='rock.png';", 5*60*1000);
       }
