@@ -1,6 +1,7 @@
 <html>
   <head>
     <title>iRock - The Virtual Pet Rock</title>
+    <script src="cookie.js"></script>
     <script>
 
       var userName;
@@ -10,6 +11,11 @@
         document.getElementById("rockImg").style.height = (document.body.clientHeight-100)*0.9;
       }
       function greetUser(){
+        if(navigator.cookieEnabled)
+        userName = readCookie("irock_username");
+        if (userName)
+        alert ("Hello" + userName + ", I missed you.");
+        else
         alert('Hello, I am your pet rock.');
       }
       function touchRock(){
@@ -20,10 +26,16 @@
         userName = prompt("What is your name?", "Enter your name here.");
         if (userName)
           alert("It is good to meet you," + userName + ".");
+          if(navigator.cookieEnabled)
+          writeCookie("irock_username", userName, 5 * 365);
+          else
+          alert("Sorry. Cookies aren't supported in  your browser. I won't remember you later.");
+        }
       }
       document.getElementById("rockImg").src = "rock_happy.png";
       setTimeout("document.getElementById('rockImg').src='rock.png';", 5*60*1000);
       }
+
     </script>
   </head>
 
