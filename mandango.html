@@ -42,14 +42,14 @@
               selSeat = -1;
               document.getElementById("seat" + i).src = "seat_avail.png";
               document.getElementById("seat" +i).alt = "Available seat";
-            }  
+            }
           }
         }
       }
     </script>
   </head>
-  <body>
-    <div style="margin-top:75px; text-align="center">
+  <body onload="initSeats();">
+    <div style="margin-top:75px; text-align=center">
       <img id="seat0" src="" alt="">
       <img id="seat1" src="" alt="">
       <img id="seat2" src="" alt="">
@@ -59,7 +59,7 @@
       <img id="seat6" src="" alt="">
       <img id="seat7" src="" alt="">
       <img id="seat8" src="" alt="">
-
+      <input type="button" id="findseat" value="Find Seat" onclick="findSeat();">
 
     </div>
   </body>
