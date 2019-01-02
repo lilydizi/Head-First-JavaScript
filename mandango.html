@@ -36,7 +36,7 @@
             document.getElementById("seat" + i).src = "seat_select.png";
             document.getElementById("seat" + i).alt = "Your seat";
             //사용자가 현재좌석을 수락할 것인지를 묻기위해 창을 띄움
-            var accept = confirm("Seat" + (i + 1) + "seat_avail.png"; //대부분의 사용자들이 좌석에 대해 0 대신 1부터 숫자를 매기기 시작하므로, 좌석번호는 실제번호보다 1만큼 크게 한다.
+            var accept = confirm("Seat" + (i + 1) + "is available. Accept?"; //대부분의 사용자들이 좌석에 대해 0 대신 1부터 숫자를 매기기 시작하므로, 좌석번호는 실제번호보다 1만큼 크게 한다.
             if (!accept) {//사용자가 빈좌석을 수락할 것인지 체크
             //사용자가 현재좌석을 거부하면, 좌석을 선택하지 않고 계속검색
               selSeat = -1;
