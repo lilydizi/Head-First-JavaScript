@@ -2,13 +2,15 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>mandango-for looping</title>
+    <title>mandango - The Macho Movie Ticket Finder</title>
+
     <script>
       var seats = [ false, true, false, true, true, true, false, true, false];
-      function initSeats(){
-        //모든 좌석 이미지를 초기화
+      var selSeat = -1;
 
-        for (var i = 0; i < seats.length; i++){
+      function initSeats() {
+        //모든 좌석 이미지를 초기화
+        for (var i = 0; i < seats.length; i++) {
           if (seats[i]) {
             //좌석을 사용 가능으로 설정
             document.getElementById("seat" + i).src = "seat_avail.png";
@@ -21,33 +23,47 @@
           }
         }
       }
-      function findSeat(){
+
+      function findSeats() {
         //좌석이 이미 선택되었다면 모든좌석을 다시초기화
         if (selSeat >= 0) {
           selSeat = -1; //selSeat이 -1이 아닌 다른값을 갖는다면 새로운 검색을 시작하고 좌석을 초기화합니다.
           initSeats();
         }
+
         //사용가능한 모든좌석 검색
-        for (var i = 0; i < seats.length; i++){
+        for (var i = 0; i < seats.length; i++) {
           //현재 좌석이 사용 가능한지 체크
-          if (seats[i]) {//좌석이 비어있다면 seat[i]는 true가 된다.
+          if (seats[i] && seats[i + 1] && seats[i + 2]) {//좌석이 비어있다면 seat[i]는 true가 된다.
           //좌석을 선택하고 좌석의 이미지를 갱신
-            selSeat = -1;
+            selSeat = i;
             document.getElementById("seat" + i).src = "seat_select.png";
             document.getElementById("seat" + i).alt = "Your seat";
+            document.getElementById("seat" + (i + 1)).src = "seat_select.png";
+            document.getElementById("seat" + (i + 1)).alt = "Your seat";
+            document.getElementById("seat" + (i + 2)).src = "seat_select.png";
+            document.getElementById("seat" + (i + 2)).alt = "Your seat";
+
             //사용자가 현재좌석을 수락할 것인지를 묻기위해 창을 띄움
-            var accept = confirm("Seat" + (i + 1) + "is available. Accept?"; //대부분의 사용자들이 좌석에 대해 0 대신 1부터 숫자를 매기기 시작하므로, 좌석번호는 실제번호보다 1만큼 크게 한다.
-            if (!accept) {//사용자가 빈좌석을 수락할 것인지 체크
-            //사용자가 현재좌석을 거부하면, 좌석을 선택하지 않고 계속검색
+            var accept = confirm("Seats" + (i + 1) + "through" + (i + 3) + "are available. Accept?"); //대부분의 사용자들이 좌석에 대해 0 대신 1부터 숫자를 매기기 시작하므로, 좌석번호는 실제번호보다 1만큼 크게 한다.
+            if (accept) {
+              break;
+            }
+            else {
               selSeat = -1;
               document.getElementById("seat" + i).src = "seat_avail.png";
-              document.getElementById("seat" +i).alt = "Available seat";
+              document.getElementById("seat" + i).alt = "Available seat";
+              document.getElementById("seat" + (i + 1)).src = "seat_avail.png";
+              document.getElementById("seat" + (i + 1)).alt = "Available seat";
+              document.getElementById("seat" + (i + 2)).src = "seat_avail.png";
+              document.getElementById("seat" + (i + 2)).alt = "Available seat";
             }
           }
         }
       }
     </script>
   </head>
+
   <body onload="initSeats();">
     <div style="margin-top:75px; text-align=center">
       <img id="seat0" src="" alt="">
@@ -59,7 +75,7 @@
       <img id="seat6" src="" alt="">
       <img id="seat7" src="" alt="">
       <img id="seat8" src="" alt="">
-      <input type="button" id="findseat" value="Find Seat" onclick="findSeat();">
+      <input type="button" id="findseats" value="Find Seats" onclick="findSeats();">
 
     </div>
   </body>
