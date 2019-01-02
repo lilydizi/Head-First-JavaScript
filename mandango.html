@@ -5,21 +5,27 @@
     <title>mandango - The Macho Movie Ticket Finder</title>
 
     <script>
-      var seats = [ false, true, false, true, true, true, false, true, false];
+      var seats = [[ false, true, false, true, true, true, false, true, false],
+                   [ false, true, false, false, true, false, true, true, true],
+                   [ true, true, true, true, true, true, false, true, false],
+                   [ true, true, true, false, true, false, false, true, false
+                   ]];
       var selSeat = -1;
 
       function initSeats() {
         //모든 좌석 이미지를 초기화
         for (var i = 0; i < seats.length; i++) {
-          if (seats[i]) {
-            //좌석을 사용 가능으로 설정
-            document.getElementById("seat" + i).src = "seat_avail.png";
-            document.getElementById("seat" + i).alt = "Available seat";
-          }
-          else {
-            //좌석을 사용 불가로 설정
-            document.getElementById("seat" + i).src = "seat_unavail.png";
-            document.getElementById("seat" + i).alt = "Unavailable seat";
+          for (var j = 0; j < seats[i].length; j++){
+            if (seats[i][j]) {
+              //좌석을 사용 가능으로 설정
+              document.getElementById("seat" + (i * seats[i].length + j)).src = "seat_avail.png";
+              document.getElementById("seat" + (i * seats[i].length + j)).alt = "Available seat";
+            }
+            else {
+              //좌석을 사용 불가로 설정
+              document.getElementById("seat" + (i * seats[i].length + j)).src = "seat_unavail.png";
+              document.getElementById("seat" + (i * seats[i].length + j)).alt = "Unavailable seat";
+            }
           }
         }
       }
@@ -32,40 +38,53 @@
         }
 
         //사용가능한 모든좌석 검색
-        for (var i = 0; i < seats.length; i++) {
-          //현재 좌석이 사용 가능한지 체크
-          if (seats[i] && seats[i + 1] && seats[i + 2]) {//좌석이 비어있다면 seat[i]는 true가 된다.
-          //좌석을 선택하고 좌석의 이미지를 갱신
-            selSeat = i;
-            document.getElementById("seat" + i).src = "seat_select.png";
-            document.getElementById("seat" + i).alt = "Your seat";
-            document.getElementById("seat" + (i + 1)).src = "seat_select.png";
-            document.getElementById("seat" + (i + 1)).alt = "Your seat";
-            document.getElementById("seat" + (i + 2)).src = "seat_select.png";
-            document.getElementById("seat" + (i + 2)).alt = "Your seat";
+        var i = 0, finished = false;
+        while (i < seats.length && !finished) {
+          for (var i = 0; j < seats[i].length; j++) {
+            //현재 좌석이 사용 가능한지 체크
+            if (seats[i][j] && seats[i][j + 1] && seats[i][j + 2]) {//좌석이 비어있다면 seat[i]는 true가 된다.
+            //boolean AND 연산자(&&)는 두개의 boolean 값을 비교해서 둘 모두가 true 인지를 체크합니다.
+            /* a && b AND a와 b 들 모두 true 일 경우에만 true 그 외는 모두 false
+            a || b OR a나 b둘 중 하나만 true이면 true, 그렇지 않으면 false
+            !a NOT a가 true이면 false, false이면 true
+            if ((largeDrink && largePopcorn) || coupon)
+            freeCandy(); boolean 논리 표현식을 함께 묶을때 괄호사용
+            */
 
-            //사용자가 현재좌석을 수락할 것인지를 묻기위해 창을 띄움
-            var accept = confirm("Seats" + (i + 1) + "through" + (i + 3) + "are available. Accept?"); //대부분의 사용자들이 좌석에 대해 0 대신 1부터 숫자를 매기기 시작하므로, 좌석번호는 실제번호보다 1만큼 크게 한다.
-            if (accept) {
-              break;
-            }
-            else {
-              selSeat = -1;
-              document.getElementById("seat" + i).src = "seat_avail.png";
-              document.getElementById("seat" + i).alt = "Available seat";
-              document.getElementById("seat" + (i + 1)).src = "seat_avail.png";
-              document.getElementById("seat" + (i + 1)).alt = "Available seat";
-              document.getElementById("seat" + (i + 2)).src = "seat_avail.png";
-              document.getElementById("seat" + (i + 2)).alt = "Available seat";
+              //좌석을 선택하고 좌석의 이미지를 갱신
+              selSeat = i * seats[i].length + j;
+              document.getElementById("seat" + (i * seats[i].length + j)).src = "seat_select.png";
+              document.getElementById("seat" + (i * seats[i].length + j)).alt = "Your seat";
+              document.getElementById("seat" + (i + 1 * seats[i].length + j)).src = "seat_select.png";
+              document.getElementById("seat" + (i + 1 * seats[i].length + j)).alt = "Your seat";
+              document.getElementById("seat" + (i + 2 * seats[i].length + j)).src = "seat_select.png";
+              document.getElementById("seat" + (i + 2 * seats[i].length + j)).alt = "Your seat";
+
+              //사용자가 현재좌석을 수락할 것인지를 묻기위해 창을 띄움
+              var accept = confirm("Seats " + (j + 1) + " through " + (j + 3) + "in Row" + (i + 1) + " are available. Accept?"); //대부분의 사용자들이 좌석에 대해 0 대신 1부터 숫자를 매기기 시작하므로, 좌석번호는 실제번호보다 1만큼 크게 한다.
+              if (accept) {
+                finished = true;
+                break;
+              }
+              else {
+                selSeat = -1;
+                document.getElementById("seat" + (i * seats[i].length + j)).src = "seat_avail.png";
+                document.getElementById("seat" + (i * seats[i].length + j)).alt = "Available seat";
+                document.getElementById("seat" + (i + 1 * seats[i].length + j)).src = "seat_avail.png";
+                document.getElementById("seat" + (i + 1 * seats[i].length + j)).alt = "Available seat";
+                document.getElementById("seat" + (i + 2 * seats[i].length + j)).src = "seat_avail.png";
+                document.getElementById("seat" + (i + 2 * seats[i].length + j)).alt = "Available seat";
+              }
             }
           }
+          i++;
         }
       }
     </script>
   </head>
 
   <body onload="initSeats();">
-    <div style="margin-top:75px; text-align=center">
+    <div style="margin-top:25px; text-align=center">
       <img id="seat0" src="" alt="">
       <img id="seat1" src="" alt="">
       <img id="seat2" src="" alt="">
@@ -74,7 +93,34 @@
       <img id="seat5" src="" alt="">
       <img id="seat6" src="" alt="">
       <img id="seat7" src="" alt="">
-      <img id="seat8" src="" alt="">
+      <img id="seat8" src="" alt=""><br>
+      <img id="seat9" src="" alt="">
+      <img id="seat10" src="" alt="">
+      <img id="seat11" src="" alt="">
+      <img id="seat12" src="" alt="">
+      <img id="seat13" src="" alt="">
+      <img id="seat14" src="" alt="">
+      <img id="seat15" src="" alt="">
+      <img id="seat16" src="" alt="">
+      <img id="seat17" src="" alt=""><br>
+      <img id="seat18" src="" alt="">
+      <img id="seat19" src="" alt="">
+      <img id="seat20" src="" alt="">
+      <img id="seat21" src="" alt="">
+      <img id="seat22" src="" alt="">
+      <img id="seat23" src="" alt="">
+      <img id="seat24" src="" alt="">
+      <img id="seat25" src="" alt="">
+      <img id="seat26" src="" alt=""><br>
+      <img id="seat27" src="" alt="">
+      <img id="seat28" src="" alt="">
+      <img id="seat29" src="" alt="">
+      <img id="seat30" src="" alt="">
+      <img id="seat31" src="" alt="">
+      <img id="seat32" src="" alt="">
+      <img id="seat33" src="" alt="">
+      <img id="seat34" src="" alt="">
+      <img id="seat35" src="" alt=""><br>
       <input type="button" id="findseats" value="Find Seats" onclick="findSeats();">
 
     </div>
