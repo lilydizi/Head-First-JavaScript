@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>mandango - The Macho Movie Ticket Finder</title>
+    <title>Mandango - The Macho Movie Ticket Finder</title>
 
     <script>
       var seats = [[ false, true, false, true, true, true, false, true, false],
@@ -15,7 +15,7 @@
       function initSeats() {
         //모든 좌석 이미지를 초기화
         for (var i = 0; i < seats.length; i++) {
-          for (var j = 0; j < seats[i].length; j++){
+          for (var j = 0; j < seats[i].length; j++) {
             if (seats[i][j]) {
               //좌석을 사용 가능으로 설정
               document.getElementById("seat" + (i * seats[i].length + j)).src = "seat_avail.png";
@@ -40,7 +40,7 @@
         //사용가능한 모든좌석 검색
         var i = 0, finished = false;
         while (i < seats.length && !finished) {
-          for (var i = 0; j < seats[i].length; j++) {
+          for (var j = 0; j < seats[i].length; j++) {
             //현재 좌석이 사용 가능한지 체크
             if (seats[i][j] && seats[i][j + 1] && seats[i][j + 2]) {//좌석이 비어있다면 seat[i]는 true가 된다.
             //boolean AND 연산자(&&)는 두개의 boolean 값을 비교해서 둘 모두가 true 인지를 체크합니다.
@@ -70,10 +70,10 @@
                 selSeat = -1;
                 document.getElementById("seat" + (i * seats[i].length + j)).src = "seat_avail.png";
                 document.getElementById("seat" + (i * seats[i].length + j)).alt = "Available seat";
-                document.getElementById("seat" + (i + 1 * seats[i].length + j)).src = "seat_avail.png";
-                document.getElementById("seat" + (i + 1 * seats[i].length + j)).alt = "Available seat";
-                document.getElementById("seat" + (i + 2 * seats[i].length + j)).src = "seat_avail.png";
-                document.getElementById("seat" + (i + 2 * seats[i].length + j)).alt = "Available seat";
+                document.getElementById("seat" + (i * seats[i].length + j + 1)).src = "seat_avail.png";
+                document.getElementById("seat" + (i * seats[i].length + j + 1)).alt = "Available seat";
+                document.getElementById("seat" + (i * seats[i].length + j + 2)).src = "seat_avail.png";
+                document.getElementById("seat" + (i * seats[i].length + j + 2)).alt = "Available seat";
               }
             }
           }
