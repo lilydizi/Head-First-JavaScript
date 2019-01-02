@@ -8,8 +8,7 @@
       var seats = [[ false, true, false, true, true, true, false, true, false],
                    [ false, true, false, false, true, false, true, true, true],
                    [ true, true, true, true, true, true, false, true, false],
-                   [ true, true, true, false, true, false, false, true, false
-                   ]];
+                   [ true, true, true, false, true, false, false, true, false ]];
       var selSeat = -1;
 
       function initSeats() {
@@ -55,10 +54,10 @@
               selSeat = i * seats[i].length + j;
               document.getElementById("seat" + (i * seats[i].length + j)).src = "seat_select.png";
               document.getElementById("seat" + (i * seats[i].length + j)).alt = "Your seat";
-              document.getElementById("seat" + (i + 1 * seats[i].length + j)).src = "seat_select.png";
-              document.getElementById("seat" + (i + 1 * seats[i].length + j)).alt = "Your seat";
-              document.getElementById("seat" + (i + 2 * seats[i].length + j)).src = "seat_select.png";
-              document.getElementById("seat" + (i + 2 * seats[i].length + j)).alt = "Your seat";
+              document.getElementById("seat" + (i * seats[i].length + j + 1)).src = "seat_select.png";
+              document.getElementById("seat" + (i * seats[i].length + j + 1)).alt = "Your seat";
+              document.getElementById("seat" + (i * seats[i].length + j + 2)).src = "seat_select.png";
+              document.getElementById("seat" + (i * seats[i].length + j + 2)).alt = "Your seat";
 
               //사용자가 현재좌석을 수락할 것인지를 묻기위해 창을 띄움
               var accept = confirm("Seats " + (j + 1) + "  through " + (j + 3) + " in Row " + (i + 1) + "  are available. Accept?"); //대부분의 사용자들이 좌석에 대해 0 대신 1부터 숫자를 매기기 시작하므로, 좌석번호는 실제번호보다 1만큼 크게 한다.
