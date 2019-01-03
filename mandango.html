@@ -17,16 +17,32 @@
           for (var j = 0; j < seats[i].length; j++) {
             if (seats[i][j]) {
               //좌석을 사용 가능으로 설정
-              document.getElementById("seat" + (i * seats[i].length + j)).src = "seat_avail.png";
-              document.getElementById("seat" + (i * seats[i].length + j)).alt = "Available seat";
+              setSeat(i * seats[i].length + j, "avail", "Available seat");
             }
             else {
               //좌석을 사용 불가로 설정
-              document.getElementById("seat" + (i * seats[i].length + j)).src = "seat_unavail.png";
-              document.getElementById("seat" + (i * seats[i].length + j)).alt = "Unavailable seat";
+              setSeat(i * seats[i].length + j, "unavail", "unavailable seat");
             }
           }
         }
+      }
+
+      function getSeatStatus(seatNum) {
+        if (selSeat ! = -1 && (seatNum == selSeat || seatNum == (selSeat + 1) || seatNum == (selSeat + 2)))
+          return "yours";
+        else if (seats[Math.floor(seatNum / seats[0].length)][seatNum % seats[0].length])
+          return "available";
+        else
+          return "unavailable";
+      }
+
+      function showSeatStatus(seatNum) {
+        alert("This seat is " + getSeatStatus(seatNum) + ".");
+      }
+
+      function setSeat(seatNum, status, description) {
+        document.getElementById("seat" + seatNum).src = "seat_" + status + ".png";
+        document.getElementById("seat" + seatNum).alt = description;
       }
 
       function findSeats() {
@@ -52,12 +68,9 @@
 
               //좌석을 선택하고 좌석의 이미지를 갱신
               selSeat = i * seats[i].length + j;
-              document.getElementById("seat" + (i * seats[i].length + j)).src = "seat_select.png";
-              document.getElementById("seat" + (i * seats[i].length + j)).alt = "Your seat";
-              document.getElementById("seat" + (i * seats[i].length + j + 1)).src = "seat_select.png";
-              document.getElementById("seat" + (i * seats[i].length + j + 1)).alt = "Your seat";
-              document.getElementById("seat" + (i * seats[i].length + j + 2)).src = "seat_select.png";
-              document.getElementById("seat" + (i * seats[i].length + j + 2)).alt = "Your seat";
+              setSeat(i * seats[i].length + j, "select", "Your seat");
+              setSeat(i * seats[i].length + j + 1, "select", "Your seat");
+              setSeat(i * seats[i].length + j + 2, "select", "Your seat");
 
               //사용자가 현재좌석을 수락할 것인지를 묻기위해 창을 띄움
               var accept = confirm("Seats " + (j + 1) + "  through " + (j + 3) + " in Row " + (i + 1) + "  are available. Accept?"); //대부분의 사용자들이 좌석에 대해 0 대신 1부터 숫자를 매기기 시작하므로, 좌석번호는 실제번호보다 1만큼 크게 한다.
@@ -67,60 +80,100 @@
               }
               else {
                 selSeat = -1;
-                document.getElementById("seat" + (i * seats[i].length + j)).src = "seat_avail.png";
-                document.getElementById("seat" + (i * seats[i].length + j)).alt = "Available seat";
-                document.getElementById("seat" + (i * seats[i].length + j + 1)).src = "seat_avail.png";
-                document.getElementById("seat" + (i * seats[i].length + j + 1)).alt = "Available seat";
-                document.getElementById("seat" + (i * seats[i].length + j + 2)).src = "seat_avail.png";
-                document.getElementById("seat" + (i * seats[i].length + j + 2)).alt = "Available seat";
+                setSeat(i * seats[i].length + j, "avail", "Available seat");
+                setSeat(i * seats[i].length + j + 1, "avail", "Available seat");
+                setSeat(i * seats[i].length + j + 2, "avail", "Available seat");
               }
             }
           }
           i++;
         }
       }
+
+      window.onload = function() {
+        document.getElementById("findSeats").onclick = findSeats;
+
+        document.getElementById("seat0").onclick = function(evt) { showSeatStatus(0); };
+        document.getElementById("seat1").onclick = function(evt) { showSeatStatus(1); };
+        document.getElementById("seat2").onclick = function(evt) { showSeatStatus(2); };
+        document.getElementById("seat3").onclick = function(evt) { showSeatStatus(3); };
+        document.getElementById("seat4").onclick = function(evt) { showSeatStatus(4); };
+        document.getElementById("seat5").onclick = function(evt) { showSeatStatus(5); };
+        document.getElementById("seat6").onclick = function(evt) { showSeatStatus(6); };
+        document.getElementById("seat7").onclick = function(evt) { showSeatStatus(7); };
+        document.getElementById("seat8").onclick = function(evt) { showSeatStatus(8); };
+        document.getElementById("seat9").onclick = function(evt) { showSeatStatus(9); };
+        document.getElementById("seat10").onclick = function(evt) { showSeatStatus(10); };
+        document.getElementById("seat11").onclick = function(evt) { showSeatStatus(11); };
+        document.getElementById("seat12").onclick = function(evt) { showSeatStatus(12); };
+        document.getElementById("seat13").onclick = function(evt) { showSeatStatus(13); };
+        document.getElementById("seat14").onclick = function(evt) { showSeatStatus(14); };
+        document.getElementById("seat15").onclick = function(evt) { showSeatStatus(15); };
+        document.getElementById("seat16").onclick = function(evt) { showSeatStatus(16); };
+        document.getElementById("seat17").onclick = function(evt) { showSeatStatus(17); };
+        document.getElementById("seat18").onclick = function(evt) { showSeatStatus(18); };
+        document.getElementById("seat19").onclick = function(evt) { showSeatStatus(19); };
+        document.getElementById("seat20").onclick = function(evt) { showSeatStatus(20); };
+        document.getElementById("seat21").onclick = function(evt) { showSeatStatus(21); };
+        document.getElementById("seat22").onclick = function(evt) { showSeatStatus(22); };
+        document.getElementById("seat23").onclick = function(evt) { showSeatStatus(23); };
+        document.getElementById("seat24").onclick = function(evt) { showSeatStatus(24); };
+        document.getElementById("seat25").onclick = function(evt) { showSeatStatus(25); };
+        document.getElementById("seat26").onclick = function(evt) { showSeatStatus(26); };
+        document.getElementById("seat27").onclick = function(evt) { showSeatStatus(27); };
+        document.getElementById("seat28").onclick = function(evt) { showSeatStatus(28); };
+        document.getElementById("seat29").onclick = function(evt) { showSeatStatus(29); };
+        document.getElementById("seat30").onclick = function(evt) { showSeatStatus(30); };
+        document.getElementById("seat31").onclick = function(evt) { showSeatStatus(31); };
+        document.getElementById("seat32").onclick = function(evt) { showSeatStatus(32); };
+        document.getElementById("seat33").onclick = function(evt) { showSeatStatus(33); };
+        document.getElementById("seat34").onclick = function(evt) { showSeatStatus(34); };
+        document.getElementById("seat35").onclick = function(evt) { showSeatStatus(35); };
+
+        initSeats();
+      };
     </script>
   </head>
 
   <body onload="initSeats();">
     <div style="margin-top:25px; text-align:center">
-      <img id="seat0" src="" alt="">
-      <img id="seat1" src="" alt="">
-      <img id="seat2" src="" alt="">
-      <img id="seat3" src="" alt="">
-      <img id="seat4" src="" alt="">
-      <img id="seat5" src="" alt="">
-      <img id="seat6" src="" alt="">
-      <img id="seat7" src="" alt="">
-      <img id="seat8" src="" alt=""><br>
-      <img id="seat9" src="" alt="">
-      <img id="seat10" src="" alt="">
-      <img id="seat11" src="" alt="">
-      <img id="seat12" src="" alt="">
-      <img id="seat13" src="" alt="">
-      <img id="seat14" src="" alt="">
-      <img id="seat15" src="" alt="">
-      <img id="seat16" src="" alt="">
-      <img id="seat17" src="" alt=""><br>
-      <img id="seat18" src="" alt="">
-      <img id="seat19" src="" alt="">
-      <img id="seat20" src="" alt="">
-      <img id="seat21" src="" alt="">
-      <img id="seat22" src="" alt="">
-      <img id="seat23" src="" alt="">
-      <img id="seat24" src="" alt="">
-      <img id="seat25" src="" alt="">
-      <img id="seat26" src="" alt=""><br>
-      <img id="seat27" src="" alt="">
-      <img id="seat28" src="" alt="">
-      <img id="seat29" src="" alt="">
-      <img id="seat30" src="" alt="">
-      <img id="seat31" src="" alt="">
-      <img id="seat32" src="" alt="">
-      <img id="seat33" src="" alt="">
-      <img id="seat34" src="" alt="">
-      <img id="seat35" src="" alt=""><br>
-      <input type="button" id="findseats" value="Find Seats" onclick="findSeats();">
+      <img id="seat0" src="" alt="" onclick="showSeatStatus(0);">
+      <img id="seat1" src="" alt="" onclick="showSeatStatus(1);">
+      <img id="seat2" src="" alt="" onclick="showSeatStatus(2);">
+      <img id="seat3" src="" alt="" onclick="showSeatStatus(3);">
+      <img id="seat4" src="" alt="" onclick="showSeatStatus(4);">
+      <img id="seat5" src="" alt="" onclick="showSeatStatus(5);">
+      <img id="seat6" src="" alt="" onclick="showSeatStatus(6);">
+      <img id="seat7" src="" alt="" onclick="showSeatStatus(7);">
+      <img id="seat8" src="" alt="" onclick="showSeatStatus(8);"><br>
+      <img id="seat9" src="" alt="" onclick="showSeatStatus(9);">
+      <img id="seat10" src="" alt="" onclick="showSeatStatus(10);">
+      <img id="seat11" src="" alt="" onclick="showSeatStatus(11);">
+      <img id="seat12" src="" alt="" onclick="showSeatStatus(12);">
+      <img id="seat13" src="" alt="" onclick="showSeatStatus(13);">
+      <img id="seat14" src="" alt="" onclick="showSeatStatus(14);">
+      <img id="seat15" src="" alt="" onclick="showSeatStatus(15);">
+      <img id="seat16" src="" alt="" onclick="showSeatStatus(16);">
+      <img id="seat17" src="" alt="" onclick="showSeatStatus(17);"><br>
+      <img id="seat18" src="" alt="" onclick="showSeatStatus(18);">
+      <img id="seat19" src="" alt="" onclick="showSeatStatus(19);">
+      <img id="seat20" src="" alt="" onclick="showSeatStatus(20);">
+      <img id="seat21" src="" alt="" onclick="showSeatStatus(21);">
+      <img id="seat22" src="" alt="" onclick="showSeatStatus(22);">
+      <img id="seat23" src="" alt="" onclick="showSeatStatus(23);">
+      <img id="seat24" src="" alt="" onclick="showSeatStatus(24);">
+      <img id="seat25" src="" alt="" onclick="showSeatStatus(25);">
+      <img id="seat26" src="" alt="" onclick="showSeatStatus(26);"><br>
+      <img id="seat27" src="" alt="" onclick="showSeatStatus(27);">
+      <img id="seat28" src="" alt="" onclick="showSeatStatus(28);">
+      <img id="seat29" src="" alt="" onclick="showSeatStatus(29);">
+      <img id="seat30" src="" alt="" onclick="showSeatStatus(30);">
+      <img id="seat31" src="" alt="" onclick="showSeatStatus(31);">
+      <img id="seat32" src="" alt="" onclick="showSeatStatus(32);">
+      <img id="seat33" src="" alt="" onclick="showSeatStatus(33);">
+      <img id="seat34" src="" alt="" onclick="showSeatStatus(34);">
+      <img id="seat35" src="" alt="" onclick="showSeatStatus(35);"><br>
+      <input type="button" id="findseats" value="Find Seats">
 
     </div>
   </body>
